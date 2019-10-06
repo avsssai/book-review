@@ -1,0 +1,31 @@
+<% include partials/header %>
+
+<div class="ui centered container segment">
+    <h1>Welcome to Shiva's Bookstore!</h1>
+    <div class="ui grid">
+        <% books.forEach(book => { %>
+            <div class="four wide column">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="https://picsum.photos/200/300" alt="image">
+                    </div>
+                    <div class="content">
+                        <a href="/home/<%= book._id %>"><%= book.bookname %></a>
+                        <div class="meta">
+                            <span class="date"><emp>By</emp> <b><%= book.author %></b></span>
+                        </div>
+                        <div class="description">
+                            <%= book.genre %>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        Published in <b><%= book.publishedYear %></b>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+        
+    </div>
+</div>
+
+<% include partials/footer %>

@@ -1,0 +1,29 @@
+<% include partials/header %>
+
+<div class="ui centered container segment">
+    <h1>Add new Book!</h1>
+    <form class="ui form" action="/home" method="POST">
+        <div class="field">
+            <label for="name">Book Name</label>
+            <input type="text" placeholder="new book.." name="bookname">
+        </div>
+
+        <div class="field">
+            <label for="author">Author</label>
+            <input type="text" placeholder="author.." name="author">
+        </div>
+
+        <div class="field">
+            <label for="publishedYear"> Published Year</label>
+            <input type="text" placeholder="published in.." name="publishedYear">
+        </div>
+
+        <div class="field">
+            <label for="genre">Genre</label>
+            <input type="text" placeholder="genre.." name="genre">
+        </div>
+        <button class="ui black basic button" type="submit">Add</button>
+    </form>
+</div>
+
+<% include partials/footer %>
