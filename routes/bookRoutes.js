@@ -3,6 +3,10 @@ var Book = require('../models/books');
 var router = express.Router();
 
 //index
+
+router.get("/",(req,res)=>{
+    res.redirect('/home');
+})
 router.get('/home',(req,res)=>{
     Book.find({},(err,books)=>{
         if(err){
@@ -23,8 +27,10 @@ router.post("/home",(req,res)=>{
     var newBook = {
         bookname: req.body.bookname,
         author: req.body.author,
+        image: req.body.image,
         publishedYear : req.body.publishedYear,
-        genre: req.body.genre
+        genre: req.body.genre,
+        description:req.body.description
     }
     
 
@@ -55,8 +61,46 @@ router.get("/home/:id",(req,res)=>{
 //delete
 
 //edit
+router.get("/home/:id/edit",(req,res)=>{
+   var id = req.params.id;
+   Book.findById(id,(err,foundBook)=>{
+       if(err){
+           console.log(err);
+       }else{
+           res.render("edit",{book:foundBook});
+       }
+   })
+})
 
 //update
+router.put("/home/:id",(req,res)=>{
+    //find the book and then update it.
+    var id = req.params.id;
+   
+    
+    
+    console.log(req.body.bookname);
+    var updatedBook = {
+        bookname: req.body.bookname,
+        author: req.body.author,
+        image: req.body.image,
+        publishedYear : req.body.publishedYear,
+        genre: req.body.genre,
+        description: req.body.description
+    }
+    // res.send({status:true,updatedBook:updatedBook});
+    Book.findByIdAndUpdate(id,updatedBook,(err,updatedBook)=>{
+        if(err){
+            console.log(err);
+            console.log(updatedBook);
+        }else{
+            console.log({success:true,message:"Book updated!"});
+            res.redirect("/home/"+id);
+        }
+    })
+
+})
+
 
 
 

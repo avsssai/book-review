@@ -3,8 +3,10 @@ var mongoose = require("mongoose");
 var bookSchema = new mongoose.Schema({
     bookname : String,
     author: String,
+    image:String,
     publishedYear : Number,
-    genre: String
+    genre: String,
+    description: String
 });
 
 

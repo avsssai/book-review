@@ -1,19 +1,91 @@
 <% include partials/header %>
 
-<div class="ui container segment centered">
-    <h1><%= book.bookname %></h1>
-    <div class="ui grid">
-        <div class="ui centered row">
-                <div class="ten wide column centered rounded">
-                    <img src="https://picsum.photos/seed/picsum/1000/600" alt="img">
+<div class="ui container">
+    <div class="ui grid segment">
+        <div class="ui row">
+            <div class="ui four wide column">
+                <img class="ui medium centered rounded image"
+                    src="<%= book.image %>"
+                    alt="img"
+                    >
+            </div>
+
+            <div class="ui twelve wide column">
+                <div class="ui dividing large header">
+                    <%= book.bookname %>
+                    <a href="/home/<%= book.id %>/edit" class="ui right floated basic black button">Edit</a>
+                    <!-- <form action="/home/<%= book.id %>/delete" class="ui form right floated">
+                        <button class="ui right floated danger button">Delete</button>
+                    </form> -->
+
                 </div>
-        </div>
-        <div class="ui centered row">
-            <div class="ten wide column centered">
-                A Classic Book
+                <p>Written by <b>
+                        <emp><%= book.author %></emp>
+                    </b></p>
+                <p>Genre : <b><%=  book.genre %></b> </p>
+                <p>Published in : <b><%= book.publishedYear %></b> </p>
+
+                <div class="ui clearing segment">
+                    <div class="ui clearing header">
+                        Reviews and Ratings
+                    </div>
+                    <p><a href="#">Amazon</a>
+                        <div>
+                            <i>5 Stars</i>
+                            <span>
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                            </span>
+                        </div>
+                    </p>
+                    <p><a href="#">Flipkart</a>
+                        <div>
+                            <i>4 1/2 Stars</i>
+                            <span>
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                                <i class="star icon"></i>
+                                <i class="star half icon"></i>
+                            </span>
+                        </div>
+                    </p>
+                </div>
+
+                <div class="ui segment">
+                    <div class="ui grid">
+                        <div class="ui two column row">
+                            <div class="three wide column segment">
+                                <p class="ui small dividing header">HardCover</p>
+                                <p><i>Rs 399/-</i></p>
+                            </div>
+                            <div class="three wide column segment">
+                                <p class="ui small dividing header">Paperback</p>
+                                <p><i>Rs 299/-</i></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
             </div>
         </div>
+
+    </div>
+    <div class="ui container segment">
+        <div class="ui dividing large header">
+            Description
+        </div>
+        <p>
+           <%= book.description %> 
+        </p>
     </div>
 </div>
+
 
 <% include partials/footer %>

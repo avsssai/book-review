@@ -1,0 +1,18 @@
+#img-card{
+    max-width: 150px;
+    max-height: 350px;
+    padding: 10px;
+    display: flex;
+
+}
+
+#book-card{
+    display: flex;
+    flex-wrap: wrap;
+    height: 380px;
+    max-height: 400px;
+}
+
+#main-page-segment{
+    height: 100vh;
+}
