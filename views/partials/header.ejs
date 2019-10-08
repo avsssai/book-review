@@ -18,7 +18,18 @@
             <div class="header item"> <i class="paper plane outline icon"></i> Bookstore</div>
             <a class="item" href="/home">All Books</a>
             <a class="item" href="/new">New Book</a>
-
+            <div class="ui right menu">
+                <% if(currentUser){ %>
+                    <div class="ui item">
+                        <p>Hello, <b><i><%= currentUser.username %></i></b></p>
+                    </div>
+                     
+                    <a href="/logout" class="ui item">Logout</a>
+                <% }if(!currentUser){ %>    
+                    <a href="/login" class="ui item">Login</a>
+                    <a href="/register" class="ui item">Sign Up</a>
+                <% } %>
+            </div>
         </div>
 
     </div>

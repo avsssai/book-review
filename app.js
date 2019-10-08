@@ -2,13 +2,40 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
     bookRoutes = require("./routes/bookRoutes"),
-    methodOverride = require("method-override");
+    authRoutes = require("./routes/authRoutes"),
+    methodOverride = require("method-override"),
+    passport = require("passport"),
+    LocalStrategy = require("passport-local"),
+    session = require("express-session"),
+    User = require('./models/user');
+
 
 mongoose.connect("mongodb://localhost:27017/bookStore",{useNewUrlParser:true,useUnifiedTopology:true})
     .then(connected => console.log("connected to the database."))
     .catch(err=>console.log(err));
 
 var app = express();
+
+app.set("trust proxy",1);
+app.use(session({
+    secret:"shiva",
+    resave:false,
+    saveUninitialized:true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use((req,res,next)=>{
+    res.locals.currentUser = req.user;
+    next();
+});
+
 var PORT = 4500;
 
 app.use(express.static("public"));
@@ -21,6 +48,9 @@ app.set("view engine","ejs");
 app.use(methodOverride("_method"));
 
 app.use('/',bookRoutes);
+app.use('/',authRoutes);
+
+//locals middleware.
 
 
 app.listen(PORT,(req,res)=>{

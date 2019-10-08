@@ -12,14 +12,14 @@ router.get('/home',(req,res)=>{
         if(err){
             throw err;
         }
-        res.render("home",{books:books});
+        res.render("books/home",{books:books});
     })
    
 });
 
 //new
 router.get('/new',(req,res)=>{
-    res.render("new");
+    res.render("books/new");
 });
 
 //create
@@ -52,7 +52,7 @@ router.get("/home/:id",(req,res)=>{
     var id = req.params.id;
     Book.findById(id)
         .then(foundBook=>{
-            res.render('show',{book:foundBook});
+            res.render('books/show',{book:foundBook});
         })
         .catch(err=> console.log(err));
 });
@@ -67,7 +67,7 @@ router.get("/home/:id/edit",(req,res)=>{
        if(err){
            console.log(err);
        }else{
-           res.render("edit",{book:foundBook});
+           res.render("books/edit",{book:foundBook});
        }
    })
 })
