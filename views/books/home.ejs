@@ -6,7 +6,9 @@
         
 
     <h1 class="ui dividing huge header">Welcome to Shiva's Bookstore!
+        <% if(currentUser){ %>
             <a href="/new" class="ui right floated button">Add New Book</a>
+        <% } %>
             <!-- <% if(currentUser && currentUser.username) { %>
                 <p><%= currentUser.username %></p>
             <% } %>     -->

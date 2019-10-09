@@ -1,6 +1,7 @@
 #img-card{
     max-width: 150px;
     max-height: 350px;
+    min-height: 200px;
     padding: 10px;
     display: flex;
 
@@ -15,4 +16,8 @@
 
 #main-page-segment{
     height: 100vh;
+}
+
+#edit-button{
+    margin-bottom: 10px;
 }

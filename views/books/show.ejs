@@ -12,15 +12,17 @@
 
             <div class="ui twelve wide column">
                 <div class="ui dividing large header">
-                    <%= book.bookname %> 
-                    <a href="/home/<%= book.id %>/edit" class="ui right floated basic black button">Edit</a>
+                    <%= book.bookname %>
+                    <% if(currentUser && currentUser._id.equals(book.owner.id)){ %>
+                        <a href="/home/<%= book.id %>/edit" class="ui right floated basic black button" id="edit-button">Edit</a>
+                    <% } %>
                     <!-- <form action="/home/<%= book.id %>/delete" class="ui form right floated">
                         <button class="ui right floated danger button">Delete</button>
                     </form> -->
 
                 </div>
                 <p>Written by <b>
-                        <emp><%= book.author %></emp> and <b><%= book.owner.username %></b>
+                        <emp><%= book.author %></emp>
                         
 
                     </b></p>

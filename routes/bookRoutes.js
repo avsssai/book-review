@@ -25,21 +25,26 @@ router.get('/new',(req,res)=>{
 
 //create
 router.post("/home",middleware.isLoggedIn,(req,res)=>{
+    var owner = {
+        id:req.user._id,
+        username:req.user.username
+    };
     var newBook = {
         bookname: req.body.bookname,
         author: req.body.author,
         image: req.body.image,
         publishedYear : req.body.publishedYear,
         genre: req.body.genre,
-        description:req.body.description
-    }
+        description:req.body.description,
+        owner:owner
+    };
     
 
     Book.create(newBook,(err,createdBook)=>{
         if(err){
             console.log(err);
         }else{
-            console.log({status:true,message:"Added new Book",book:createdBook});
+            console.log({status:true,message:"Added new Book"});
             res.redirect('/home');
         }
     })
@@ -62,7 +67,7 @@ router.get("/home/:id",(req,res)=>{
 //delete
 
 //edit
-router.get("/home/:id/edit",(req,res)=>{
+router.get("/home/:id/edit",middleware.checkBookOwnership,(req,res)=>{
    var id = req.params.id;
    Book.findById(id,(err,foundBook)=>{
        if(err){
@@ -74,7 +79,7 @@ router.get("/home/:id/edit",(req,res)=>{
 })
 
 //update
-router.put("/home/:id",(req,res)=>{
+router.put("/home/:id",middleware.checkBookOwnership,(req,res)=>{
     //find the book and then update it.
     var id = req.params.id;
    

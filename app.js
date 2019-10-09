@@ -12,7 +12,7 @@ var express = require("express"),
     Comment = require('./models/comments');
 
 
-mongoose.connect("mongodb://localhost:27017/bookStore",{useNewUrlParser:true,useUnifiedTopology:true})
+mongoose.connect("mongodb://localhost:27017/bookReview",{useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false})
     .then(connected => console.log("connected to the database."))
     .catch(err=>console.log(err));
 
