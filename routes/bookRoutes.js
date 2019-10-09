@@ -1,6 +1,7 @@
 var express = require("express");
 var Book = require('../models/books');
 var router = express.Router();
+var middleware = require('../middleware/index');
 
 //index
 
@@ -23,7 +24,7 @@ router.get('/new',(req,res)=>{
 });
 
 //create
-router.post("/home",(req,res)=>{
+router.post("/home",middleware.isLoggedIn,(req,res)=>{
     var newBook = {
         bookname: req.body.bookname,
         author: req.body.author,
@@ -50,7 +51,7 @@ router.post("/home",(req,res)=>{
 //REST form --> /index/:id
 router.get("/home/:id",(req,res)=>{
     var id = req.params.id;
-    Book.findById(id)
+    Book.findById(id).populate("comments").exec()
         .then(foundBook=>{
             res.render('books/show',{book:foundBook});
         })

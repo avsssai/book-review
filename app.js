@@ -3,11 +3,13 @@ var express = require("express"),
     mongoose = require("mongoose"),
     bookRoutes = require("./routes/bookRoutes"),
     authRoutes = require("./routes/authRoutes"),
+    commentRoutes = require("./routes/commentRoutes"),
     methodOverride = require("method-override"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
     session = require("express-session"),
-    User = require('./models/user');
+    User = require('./models/user'),
+    Comment = require('./models/comments');
 
 
 mongoose.connect("mongodb://localhost:27017/bookStore",{useNewUrlParser:true,useUnifiedTopology:true})
@@ -49,6 +51,7 @@ app.use(methodOverride("_method"));
 
 app.use('/',bookRoutes);
 app.use('/',authRoutes);
+app.use('/home/:id',commentRoutes);
 
 //locals middleware.
 

@@ -12,7 +12,7 @@
 
             <div class="ui twelve wide column">
                 <div class="ui dividing large header">
-                    <%= book.bookname %>
+                    <%= book.bookname %> 
                     <a href="/home/<%= book.id %>/edit" class="ui right floated basic black button">Edit</a>
                     <!-- <form action="/home/<%= book.id %>/delete" class="ui form right floated">
                         <button class="ui right floated danger button">Delete</button>
@@ -20,7 +20,9 @@
 
                 </div>
                 <p>Written by <b>
-                        <emp><%= book.author %></emp>
+                        <emp><%= book.author %></emp> and <b><%= book.owner.username %></b>
+                        
+
                     </b></p>
                 <p>Genre : <b><%=  book.genre %></b> </p>
                 <p>Published in : <b><%= book.publishedYear %></b> </p>
@@ -82,10 +84,23 @@
             Description
         </div>
         <p>
+            
            <%= book.description %> 
         </p>
     </div>
 </div>
 
+<div class="ui container segment">
+    <h1 class="ui dividing header">Comments</h1>
+    <% book.comments.forEach(comment => { %>
+        <div class="ui black segment">
+            <h1 class="ui dividing small header"><%= comment.author %></h1>
+            <p><%= comment.text %></p>
+        </div>
+
+   <% }) %>
+   
+
+</div>
 
 <% include ../partials/footer %>
