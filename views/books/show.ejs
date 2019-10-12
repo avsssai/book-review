@@ -14,7 +14,11 @@
                 <div class="ui dividing large header">
                     <%= book.bookname %>
                     <% if(currentUser && currentUser._id.equals(book.owner.id)){ %>
-                        <a href="/home/<%= book.id %>/edit" class="ui right floated basic black button" id="edit-button">Edit</a>
+                        <form action="/home/<%= book._id %>/?_method=DELETE" method="POST" >
+                            <button type="submit" class="ui right floated basic red button" >Delete</button>
+                        </form>
+                            <a href="/home/<%= book.id %>/edit" class="ui right floated basic black button" id="edit-button">Edit</a>
+
                     <% } %>
                     <!-- <form action="/home/<%= book.id %>/delete" class="ui form right floated">
                         <button class="ui right floated danger button">Delete</button>
