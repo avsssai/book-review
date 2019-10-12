@@ -29,11 +29,15 @@ router.post('/register', (req, res) => {
         req.body.password
         ).then(user=>{
             passport.authenticate('local')(req,res,()=>{
+                req.flash("success","Registered successfully!");
                 res.redirect('/home');
+                
             })
         })
         .catch(err=> {
+            req.flash("error",err.message);
             res.redirect('/register');
+            
             console.log(err)
         });
         
@@ -45,10 +49,14 @@ router.get('/login', (req, res) => {
 
 router.post('/login',
     passport.authenticate('local', {
+        successFlash:"Hey, Welcome back!",
         successRedirect: '/',
-        failureRedirect: '/login'
+        failureFlash:true,
+        failureRedirect: '/login'  
+        
     }),(err,login)=>{
         if(err){
+            req.flash("error","Invalid username or password.");
             console.log(err);
         }
     });

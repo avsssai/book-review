@@ -97,10 +97,16 @@
 </div>
 
 <div class="ui container segment">
-    <h1 class="ui dividing header">Comments</h1>
+ <h1 class="ui dividing header">Comments</h1>
+ <% if(currentUser) { %>
+    <% include ../comments/new-comment %>
+        
+        <!-- <a type="submit" class="ui right floated basic black button" href="/home/<%= book._id %>/new-comment">Add Comment</a> -->
+        <% } %>
+    
     <% book.comments.forEach(comment => { %>
         <div class="ui black segment">
-            <h1 class="ui dividing small header"><%= comment.author %></h1>
+            <div class="ui dividing header"><%= comment.author.username %></div>
             <p><%= comment.text %></p>
         </div>
 

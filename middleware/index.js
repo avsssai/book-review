@@ -30,6 +30,25 @@ middleware.checkBookOwnership = function(req,res,next){
     }else{
         res.redirect("back");
     }
-}
+};
 
+ 
+ middleware.checkCommentOwnership = function (req,res,next){
+    //is the user logged in?
+    if(req.isAuthenticated()){
+        //does the user own the comment he is trying to edit or delete?
+        Comment.findById(req.params.comment_id)
+            .then(foundComment=>{
+                if(foundComment.owner.id.equals(req.body._id)){
+                    next();
+                }else{
+                    res.redirect("back");
+                }
+            })
+            .catch(err=>{
+                res.redirect("back");
+                console.log(err);
+            })
+    }
+}
 module.exports = middleware;

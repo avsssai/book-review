@@ -9,7 +9,8 @@ var express = require("express"),
     LocalStrategy = require("passport-local"),
     session = require("express-session"),
     User = require('./models/user'),
-    Comment = require('./models/comments');
+    Comment = require('./models/comments'),
+    flash = require('connect-flash');
 
 
 mongoose.connect("mongodb://localhost:27017/bookReview",{useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false})
@@ -33,8 +34,13 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(flash());
+
 app.use((req,res,next)=>{
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+
     next();
 });
 
